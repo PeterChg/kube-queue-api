@@ -86,6 +86,7 @@ type QueueUnitStatus struct {
 	Phase          QueueUnitPhase `json:"phase" protobuf:"bytes,1,name=phase"`
 	Message        string         `json:"message,omitempty" protobuf:"bytes,2,opt,name=message"`
 	LastUpdateTime *metav1.Time   `json:"lastUpdateTime" protobuf:"bytes,3,name=lastUpdateTime"`
+	Position       string         `json:"position" protobuf:"bytes,4,name=position"`
 }
 
 type QueueUnitPhase string
