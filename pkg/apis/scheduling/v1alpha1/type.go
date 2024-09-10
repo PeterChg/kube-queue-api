@@ -98,6 +98,7 @@ const (
 	SchedSucceed QueueUnitPhase = "Succeed"
 	SchedFailed  QueueUnitPhase = "Failed"
 	Backoff      QueueUnitPhase = "TimeoutBackoff"
+	JobNotFound  QueueUnitPhase = "related Job not found"
 )
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
