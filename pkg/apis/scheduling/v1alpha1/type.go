@@ -92,13 +92,14 @@ type QueueUnitStatus struct {
 type QueueUnitPhase string
 
 const (
-	Enqueued     QueueUnitPhase = "Enqueued"
-	Dequeued     QueueUnitPhase = "Dequeued"
-	SchedReady   QueueUnitPhase = "Running"
-	SchedSucceed QueueUnitPhase = "Succeed"
-	SchedFailed  QueueUnitPhase = "Failed"
-	Backoff      QueueUnitPhase = "TimeoutBackoff"
-	JobNotFound  QueueUnitPhase = "RelatedJobNotFound"
+	Enqueued          QueueUnitPhase = "Enqueued"
+	Dequeued          QueueUnitPhase = "Dequeued"
+	SchedReady        QueueUnitPhase = "Running"
+	SchedSucceed      QueueUnitPhase = "Succeed"
+	SchedFailed       QueueUnitPhase = "Failed"
+	Backoff           QueueUnitPhase = "TimeoutBackoff"
+	JobNotFound       QueueUnitPhase = "RelatedJobNotFound"
+	JobStatusNotFound QueueUnitPhase = "JobStatusNotFound"
 )
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
