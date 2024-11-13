@@ -33,14 +33,15 @@ type Queue struct {
 
 // QueueSpec defines the desired state of Queue
 type QueueSpec struct {
-	QueuePolicy       QueuePolicy `json:"queuePolicy,omitempty" protobuf:"bytes,1,opt,name=queuePolicy`
-	Priority          *int32      `json:"priority,omitempty" protobuf:"varint,2,opt,name=priority"`
-	PriorityClassName string      `json:"priorityClassName,omitempty" protobuf:"bytes,3,opt,name=priorityClassName"`
+	QueuePolicy       QueuePolicy         `json:"queuePolicy,omitempty" protobuf:"bytes,1,opt,name=queuePolicy`
+	Priority          *int32              `json:"priority,omitempty" protobuf:"varint,2,opt,name=priority"`
+	PriorityClassName string              `json:"priorityClassName,omitempty" protobuf:"bytes,3,opt,name=priorityClassName"`
+	Capability        corev1.ResourceList `json:"capability,omitempty" protobuf:"bytes,4,name=capability"`
 }
 
 // QueueStatus defines the observed state of Queue
 type QueueStatus struct {
-	// TODO
+	Allocated corev1.ResourceList `json:"allocated,omitempty" protobuf:"bytes,1,name=allocated"`
 }
 
 // +k8s:openapi-gen=true
