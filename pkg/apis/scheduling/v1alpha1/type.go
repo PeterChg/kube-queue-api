@@ -53,6 +53,14 @@ const (
 	QueuePolicyPriority QueuePolicy = "Priority"
 )
 
+type ConditionStatus string
+
+const (
+	ConditionTrue    ConditionStatus = "True"
+	ConditionFalse   ConditionStatus = "False"
+	ConditionUnknown ConditionStatus = "Unknown"
+)
+
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // QueueUnitList contains a list of QueueUnit
@@ -84,10 +92,27 @@ type QueueUnitSpec struct {
 
 // QueueUnitStatus defines the observed state of QueueUnit
 type QueueUnitStatus struct {
-	Phase          QueueUnitPhase `json:"phase" protobuf:"bytes,1,name=phase"`
-	Message        string         `json:"message,omitempty" protobuf:"bytes,2,opt,name=message"`
-	LastUpdateTime *metav1.Time   `json:"lastUpdateTime" protobuf:"bytes,3,name=lastUpdateTime"`
-	Position       string         `json:"position" protobuf:"bytes,4,name=position"`
+	Conditions     []QueueUnitCondition `json:"conditions,omitempty"`
+	Phase          QueueUnitPhase       `json:"phase" protobuf:"bytes,1,name=phase"`
+	Message        string               `json:"message,omitempty" protobuf:"bytes,2,opt,name=message"`
+	LastUpdateTime *metav1.Time         `json:"lastUpdateTime" protobuf:"bytes,3,name=lastUpdateTime"`
+	Position       string               `json:"position" protobuf:"bytes,4,name=position"`
+}
+
+// JobCondition describes the state of the job at a certain point.
+type QueueUnitCondition struct {
+	// Type of job condition.
+	Type QueueUnitPhase `json:"queueUnitPhase"`
+	// Status of the condition, one of True, False, Unknown.
+	Status ConditionStatus `json:"status"`
+	// The reason for the condition's last transition.
+	Reason string `json:"reason,omitempty"`
+	// A human readable message indicating details about the transition.
+	Message string `json:"message,omitempty"`
+	// The last time this condition was updated.
+	LastUpdateTime metav1.Time `json:"lastUpdateTime,omitempty"`
+	// Last time the condition transitioned from one status to another.
+	LastTransitionTime metav1.Time `json:"lastTransitionTime,omitempty"`
 }
 
 type QueueUnitPhase string
