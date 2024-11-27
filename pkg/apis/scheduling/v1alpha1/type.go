@@ -102,7 +102,7 @@ type QueueUnitStatus struct {
 // JobCondition describes the state of the job at a certain point.
 type QueueUnitCondition struct {
 	// Type of job condition.
-	Type QueueUnitPhase `json:"queueUnitPhase"`
+	Type QueueUnitPhase `json:"type"`
 	// Status of the condition, one of True, False, Unknown.
 	Status ConditionStatus `json:"status"`
 	// The reason for the condition's last transition.
