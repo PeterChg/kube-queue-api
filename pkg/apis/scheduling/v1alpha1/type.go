@@ -88,6 +88,8 @@ type QueueUnitSpec struct {
 	Queue             string                  `json:"queue,omitempty" protobuf:"bytes,3,opt,name=queue"`
 	Resource          corev1.ResourceList     `json:"resource,omitempty" protobuf:"bytes,4,name=resource"`
 	PriorityClassName string                  `json:"priorityClassName,omitempty" protobuf:"bytes,5,opt,name=priorityClassName"`
+	Replicas          *int32                  `json:"replicas,omitempty" protobuf:"varint,6,opt,name=replicas"`
+	Strategy          DequeuedStrategy        `json:"strategy,omitempty" protobuf:"bytes,7,opt,name=strategy"`
 }
 
 // QueueUnitStatus defines the observed state of QueueUnit
@@ -97,6 +99,7 @@ type QueueUnitStatus struct {
 	Message        string               `json:"message,omitempty" protobuf:"bytes,2,opt,name=message"`
 	LastUpdateTime *metav1.Time         `json:"lastUpdateTime" protobuf:"bytes,3,name=lastUpdateTime"`
 	Position       string               `json:"position" protobuf:"bytes,4,name=position"`
+	Replicas       *int32               `json:"replicas,omitempty" protobuf:"varint,5,opt,name=replicas"`
 }
 
 // JobCondition describes the state of the job at a certain point.
@@ -126,6 +129,14 @@ const (
 	Backoff           QueueUnitPhase = "TimeoutBackoff"
 	JobNotFound       QueueUnitPhase = "RelatedJobNotFound"
 	JobStatusNotFound QueueUnitPhase = "JobStatusNotFound"
+	Updating          QueueUnitPhase = "Updating"
+)
+
+type DequeuedStrategy string
+
+const (
+	BestEffort DequeuedStrategy = "best-effort"
+	Gang       DequeuedStrategy = "gang"
 )
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
