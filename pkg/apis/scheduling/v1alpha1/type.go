@@ -37,6 +37,7 @@ type QueueSpec struct {
 	Priority          *int32              `json:"priority,omitempty" protobuf:"varint,2,opt,name=priority"`
 	PriorityClassName string              `json:"priorityClassName,omitempty" protobuf:"bytes,3,opt,name=priorityClassName"`
 	Capability        corev1.ResourceList `json:"capability,omitempty" protobuf:"bytes,4,name=capability"`
+	ResourceReserve   bool                `json:"resourceReserve,omitempty" protobuf:"varint,5,opt,name=resourceReserve"`
 }
 
 // QueueStatus defines the observed state of Queue
@@ -49,8 +50,9 @@ type QueueStatus struct {
 type QueuePolicy string
 
 const (
-	QueuePolicyFIFO     QueuePolicy = "FIFO"
-	QueuePolicyPriority QueuePolicy = "Priority"
+	QueuePolicyFIFO         QueuePolicy = "FIFO"
+	QueuePolicyPriority     QueuePolicy = "Priority"
+	QueueBestEffortPriority QueuePolicy = "BestEffortPriority"
 )
 
 type ConditionStatus string
