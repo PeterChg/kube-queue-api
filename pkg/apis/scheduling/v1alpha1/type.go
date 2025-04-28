@@ -92,6 +92,7 @@ type QueueUnitSpec struct {
 	Replicas          int32                   `json:"replicas,omitempty" protobuf:"varint,6,opt,name=replicas"`
 	Strategy          DequeuedStrategy        `json:"strategy,omitempty" protobuf:"bytes,7,opt,name=strategy"`
 	ResourceReserve   bool                    `json:"resourceReserve,omitempty" protobuf:"varint,8,opt,name=resourceReserve"`
+	Requeue           bool                    `json:"requeue,omitempty" protobuf:"varint,9,opt,name=requeue"`
 }
 
 // QueueUnitStatus defines the observed state of QueueUnit
